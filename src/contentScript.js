@@ -41,3 +41,33 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   sendResponse({});
   return true;
 });
+
+function handleMessage(text) {
+  // Communicate with background file by sending a message
+  chrome.runtime.sendMessage(
+    {
+      type: 'GREETINGS',
+      payload: {
+        message: text,
+      },
+    },
+    (response) => {
+      console.log(response);
+    }
+  );
+}
+
+function receiveMessage(event) {
+  // console.log('contentscrpt receiveMessage', event)
+
+  if (event.source !== window) {
+    return;
+  }
+
+  if (event.data.type && (event.data.type === "FROM_PAGE")) {
+    console.log("Content script received: " + event.data.text);
+    handleMessage(event.data.text)
+  }
+}
+
+window.addEventListener("message", receiveMessage, false);

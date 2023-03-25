@@ -4,6 +4,7 @@
   "description": "My Chrome Extension",
   "private": true,
   "scripts": {
+    "replace_background": "sed -i '' 's/document.baseURI[ ]*||//' ./build/background.js",
     "watch": "webpack --mode=development --watch --config config/webpack.config.js",
     "build": "webpack --mode=production --config config/webpack.config.js",
     "format": "prettier --write --ignore-unknown \"{config,public,src}/**/*.{html,css,js,ts,json}\""
@@ -17,5 +18,8 @@
     "webpack": "^5.76.3",
     "webpack-cli": "^4.10.0",
     "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "@wk3368/rust-rsa-wasm-npm": "^0.2.0"
   }
 }

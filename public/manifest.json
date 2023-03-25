@@ -19,6 +19,15 @@
   "permissions": [
     "storage"
   ],
+  "web_accessible_resources": [
+    {
+      "resources": ["rust_rsa_wasm_npm_bg.wasm"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self';"
+  },
   "content_scripts": [
     {
       "matches": [
